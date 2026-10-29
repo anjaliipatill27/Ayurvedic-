@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#174c38">
+<title>AyurClassify | Discover Your Dosha</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--forest:#174c38;--forest2:#103b2b;--leaf:#3c7958;--sage:#dfe9d8;--sage2:#edf2e8;--cream:#faf8f1;--paper:#fffefa;--ink:#24372c;--muted:#718075;--line:#dce5d8;--gold:#c7a76c;--shadow:0 18px 55px rgba(27,64,43,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;line-height:1.6}button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}.hidden{display:none!important}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(250,248,241,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(220,229,216,.8)}.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;color:var(--forest);text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-.5px}.brand-mark{width:38px;height:38px;border-radius:50% 50% 50% 8px;display:grid;place-items:center;background:var(--forest);color:#fff;font-size:20px;transform:rotate(-8deg)}.brand-mark span{transform:rotate(8deg)}.nav-links{display:flex;align-items:center;gap:25px}.nav-links a{color:#536457;text-decoration:none;font-size:14px;font-weight:600}.nav-links a:hover{color:var(--leaf)}.nav-actions{display:flex;align-items:center;gap:10px}.nav-toggle{display:none;background:none;border:0;color:var(--forest);font-size:26px;padding:8px}
+.btn{border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--forest);color:white;box-shadow:0 8px 18px rgba(23,76,56,.16)}.btn-primary:hover{background:var(--forest2)}.btn-light{background:var(--sage2);color:var(--forest)}.btn-outline{background:transparent;border:1px solid var(--line);color:var(--forest)}.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.hero{padding:65px 0 74px;overflow:hidden;background:radial-gradient(ellipse at 84% 15%,#e1ead8 0,transparent 32%),linear-gradient(130deg,#faf8f1 30%,#f0f3e9 100%)}.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:54px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--leaf);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase}.eyebrow:before{content:"";width:24px;height:1px;background:var(--gold)}h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:600;line-height:1.13;margin:0;color:var(--forest)}.hero h1{font-size:clamp(42px,5.6vw,70px);letter-spacing:-1.8px;margin:20px 0}.hero h1 em{font-style:normal;color:var(--leaf)}.hero-copy{font-size:17px;color:#667568;max-width:520px;line-height:1.8}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.trust-row{display:flex;align-items:center;gap:12px;margin-top:30px;color:var(--muted);font-size:12px}.trust-icons{display:flex}.trust-icons span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e4ebdc;border:2px solid var(--cream);margin-left:-7px;color:var(--forest)}.trust-icons span:first-child{margin-left:0}.hero-art{position:relative;min-height:440px;display:grid;place-items:center}.art-orbit{position:absolute;width:min(100%,440px);aspect-ratio:1;border:1px solid #d1decd;border-radius:50%;animation:rotate 45s linear infinite}.art-orbit:before,.art-orbit:after{content:"";position:absolute;border:1px solid #d1decd;border-radius:50%;inset:35px}.art-orbit:after{inset:75px}.plant-card{position:relative;width:min(83%,370px);height:390px;border-radius:190px 190px 28px 28px;overflow:hidden;background:linear-gradient(145deg,#dce8d3,#9eb99b);box-shadow:var(--shadow);display:grid;place-items:center}.plant-card svg{width:88%;height:90%;filter:drop-shadow(0 12px 12px #174c3820)}.float-note{position:absolute;background:rgba(255,254,250,.94);backdrop-filter:blur(12px);border:1px solid #fff;border-radius:16px;padding:14px 17px;box-shadow:var(--shadow);font-size:12px;color:var(--muted);animation:float 5s ease-in-out infinite}.float-note strong{display:block;color:var(--forest);font-size:15px}.note-top{top:58px;right:0}.note-bottom{bottom:50px;left:0;animation-delay:-2s}
+.section{padding:80px 0}.section-soft{background:#f0f3e9}.section-head{text-align:center;max-width:650px;margin:0 auto 42px}.section-head h2{font-size:clamp(30px,4vw,44px);margin:13px 0}.section-head p{color:var(--muted);margin:0}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.feature-card{background:var(--paper);border:1px solid var(--line);padding:28px;border-radius:22px;transition:transform .25s,box-shadow .25s}.feature-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.feature-icon{width:48px;height:48px;border-radius:16px;background:var(--sage2);display:grid;place-items:center;font-size:23px;margin-bottom:22px}.feature-card h3{font-size:22px;margin-bottom:10px}.feature-card p{font-size:14px;color:var(--muted);margin:0}
+.dosha-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.dosha-card{padding:28px;border-radius:22px;min-height:210px;border:1px solid var(--line);background:var(--paper)}.dosha-card .symbol{font-size:28px}.dosha-card h3{font-size:25px;margin:10px 0}.dosha-card p{color:var(--muted);font-size:14px;margin:0}.dosha-card.vata{background:#f5f0e3}.dosha-card.pitta{background:#f5e9dc}.dosha-card.kapha{background:#e7efe4}
+.cta-band{background:var(--forest);color:#fff;border-radius:28px;padding:44px;display:flex;align-items:center;justify-content:space-between;gap:24px}.cta-band h2{color:#fff;font-size:clamp(28px,4vw,40px);max-width:550px}.cta-band p{color:#d5e3d6;margin-bottom:0}.cta-band .btn{background:#f5f1e5;color:var(--forest);flex-shrink:0}
+.footer{background:#103b2b;color:#d7e2d6;padding:44px 0 22px}.footer-top{display:flex;justify-content:space-between;gap:25px;align-items:flex-start}.footer .brand{color:#fff}.footer p{font-size:13px;color:#b8cbbd;max-width:440px}.footer-bottom{border-top:1px solid #ffffff24;margin-top:25px;padding-top:18px;display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#b8cbbd}
+main{padding:28px 0 70px}.page-intro{margin:16px 0 26px}.page-intro h1{font-size:clamp(30px,4vw,42px);margin:8px 0}.page-intro p{color:var(--muted);margin:0}.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,32px);box-shadow:0 10px 35px rgba(27,64,43,.05);margin-bottom:22px}.panel h2{font-size:25px;margin-bottom:8px}.panel-sub{font-size:14px;color:var(--muted);margin:0 0 18px}
+.auth-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:stretch}.auth-aside{border-radius:22px;padding:34px;background:linear-gradient(145deg,#174c38,#286347);color:white;min-height:390px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}.auth-aside:after{content:"✦";position:absolute;right:20px;bottom:15px;font-size:150px;color:#ffffff0d}.auth-aside h2{font-size:34px;color:#fff;margin:18px 0}.auth-aside p{color:#d5e3d6;font-size:14px}.auth-aside .mini-tag{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#d7e6d3}.auth-form label,.question label{display:block;font-weight:700;font-size:13px;margin:17px 0 7px}.auth-form input,.question select{width:100%;border:1px solid #d8e2d5;border-radius:12px;padding:13px 14px;background:#fffefa;color:var(--ink);outline:none;transition:border .2s,box-shadow .2s}.auth-form input:focus,.question select:focus{border-color:var(--leaf);box-shadow:0 0 0 3px #3c79581c}.field-hint{font-size:12px;color:var(--muted);margin-top:5px}.message{font-size:13px;min-height:20px;margin:12px 0 0;overflow-wrap:anywhere}.message.error{color:#a63e34}.message.success{color:#267447}.form-switch{text-align:center;font-size:13px;color:var(--muted);margin-top:15px}.text-button{border:0;background:none;color:var(--leaf);font-weight:700;padding:3px}
+.app-nav{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 25px}.app-nav button{border:1px solid var(--line);background:#fffefa;color:#5e6d61;border-radius:999px;padding:10px 16px;font-weight:700;font-size:13px}.app-nav button.active,.app-nav button:hover{background:var(--forest);color:white;border-color:var(--forest)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.stat-card{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fffefa}.stat-card span{font-size:12px;color:var(--muted)}.stat-card strong{display:block;font-size:26px;color:var(--forest);margin-top:4px}
+.question-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.question{border:1px solid var(--line);border-radius:15px;padding:14px;background:#fffefa}.question label{margin-top:0;min-height:38px}.result-box{margin-top:22px;background:linear-gradient(130deg,#eef4e9,#faf8ef);border:1px solid #d5e3d0;border-radius:18px;padding:22px}.result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.result-top h2{font-size:29px;margin:5px 0}.result-pill{background:#dcebd9;color:var(--forest);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700}.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.score-card{background:#fffefa;border:1px solid var(--line);border-radius:14px;padding:15px}.score-card h3{font-family:'DM Sans',sans-serif;font-size:13px}.score-number{font-size:28px;font-weight:700;color:var(--forest);margin:6px 0 10px}.track{height:7px;background:#e8ede5;border-radius:20px;overflow:hidden}.fill{height:100%;width:0;background:var(--leaf);border-radius:20px;transition:width .7s ease}.disclaimer{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.7}
+.history-list{display:grid;gap:10px}.history-item{border:1px solid var(--line);background:#fffefa;border-radius:14px;padding:15px;display:flex;justify-content:space-between;align-items:center;gap:14px}.history-item strong{color:var(--forest)}.history-item small{display:block;color:var(--muted);margin-top:3px}.empty-state{text-align:center;padding:28px;color:var(--muted);background:#f7f8f2;border-radius:14px}
+.about-copy{color:var(--muted);font-size:14px;line-height:1.8}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.about-item{background:#f4f6ee;border-radius:15px;padding:18px}.about-item strong{color:var(--forest);display:block;margin-bottom:5px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:translateY(0)}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}@keyframes rotate{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(max-width:850px){.hero-grid{gap:22px}.hero-art{min-height:350px}.plant-card{height:320px}.feature-grid{grid-template-columns:1fr 1fr}.auth-layout{grid-template-columns:1fr}.auth-aside{min-height:230px}.question-grid{grid-template-columns:1fr 1fr}.cta-band{padding:32px;align-items:flex-start;flex-direction:column}}
+@media(max-width:650px){.wrap{width:min(100% - 28px,1160px)}.nav{min-height:68px;flex-wrap:wrap}.nav-toggle{display:block}.nav-links{display:none;order:4;width:100%;padding:0 0 16px;flex-direction:column;align-items:flex-start;gap:15px}.nav-links.open{display:flex}.nav-actions .btn{padding:10px 14px;font-size:12px}.hero{padding:42px 0 50px}.hero-grid{grid-template-columns:1fr;gap:10px}.hero h1{font-size:44px}.hero-copy{font-size:15px}.hero-art{min-height:320px}.plant-card{height:285px;width:260px}.note-top{right:0;top:25px}.note-bottom{left:0;bottom:20px}.section{padding:58px 0}.feature-grid,.dosha-grid{grid-template-columns:1fr}.feature-card{padding:23px}.cta-band{padding:26px;border-radius:22px}.footer-top,.footer-bottom{flex-direction:column}.stats-grid{grid-template-columns:1fr 1fr}.stats-grid .stat-card:last-child{grid-column:1/-1}.question-grid,.score-grid{grid-template-columns:1fr}.question label{min-height:0}.result-top{flex-direction:column}.history-item{align-items:flex-start;flex-direction:column}.about-grid{grid-template-columns:1fr}.panel{border-radius:17px}.app-nav{gap:7px}.app-nav button{padding:9px 12px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="#home" class="brand" id="brandLink"><span class="brand-mark"><span>✦</span></span> AyurClassify</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="publicNav">
+      <a href="#home">Home</a><a href="#about">About</a><a href="#doshas">The Doshas</a>
+    </nav>
+    <div class="nav-actions" id="publicActions">
+      <button class="btn btn-outline" id="navLogin">Log in</button>
+      <button class="btn btn-primary" id="navGetStarted">Get started <span>↗</span></button>
+    </div>
+    <div class="nav-actions hidden" id="userActions">
+      <span id="navUserName" style="font-size:13px;font-weight:700;color:var(--forest)"></span>
+      <button class="btn btn-outline" id="navLogout">Log out</button>
+    </div>
+  </div>
+</header>
+
+<section id="landingView">
+  <section class="hero" id="home">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">A mindful learning experience</span>
+        <h1>Explore your nature.<br><em>Understand your dosha.</em></h1>
+        <p class="hero-copy">Discover a simplified, educational introduction to Vata, Pitta and Kapha through a clear rule-based classification experience inspired by Ayurvedic concepts.</p>
+        <div class="hero-actions"><button class="btn btn-primary" id="heroStart">Begin your journey <span>↗</span></button><a href="#about" class="btn btn-light">Explore AyurClassify</a></div>
+        <div class="trust-row"><div class="trust-icons"><span>🌿</span><span>✦</span><span>◌</span></div><span>Simple questions · Transparent rules · Personal history</span></div>
+      </div>
+      <div class="hero-art reveal" aria-label="Botanical illustration">
+        <div class="art-orbit"></div>
+        <div class="plant-card">
+          <svg viewBox="0 0 320 390" role="img" aria-label="Stylized botanical leaves" xmlns="http://www.w3.org/2000/svg">
+            <path d="M159 360 C165 280 145 205 166 90" fill="none" stroke="#315e3f" stroke-width="5" stroke-linecap="round"/>
+            <path d="M163 300 C115 273 83 238 65 195 C116 201 151 236 163 300Z" fill="#3e7952"/>
+            <path d="M160 265 C207 236 239 201 252 157 C204 165 170 203 160 265Z" fill="#6b9569"/>
+            <path d="M165 211 C119 183 98 147 95 109 C138 126 165 163 165 211Z" fill="#789d72"/>
+            <path d="M166 165 C207 139 226 105 224 66 C187 86 165 119 166 165Z" fill="#315e3f"/>
+            <path d="M161 337 C124 321 103 297 91 268 C128 276 151 302 161 337Z" fill="#a1b995"/>
+            <path d="M164 120 C139 95 132 64 141 35 C166 57 175 89 164 120Z" fill="#426f4b"/>
+            <path d="M163 300 L91 213 M160 265 L231 179 M165 211 L117 139 M166 165 L207 96 M161 337 L111 282" fill="none" stroke="#d8e5cd" stroke-width="2" opacity=".8"/>
+            <circle cx="160" cy="360" r="6" fill="#315e3f"/>
+          </svg>
+        </div>
+        <div class="float-note note-top"><strong>3 dosha categories</strong>One simple learning model</div>
+        <div class="float-note note-bottom"><strong>Rule-based logic</strong>Scores explained clearly</div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">About the experience</span><h2>Traditional concepts, explained simply.</h2><p>AyurClassify demonstrates how selected concepts can be represented with facts, predefined rules and a transparent scoring process.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card reveal"><div class="feature-icon">✧</div><h3>Easy questionnaire</h3><p>Answer a few simple questions about selected characteristics in this educational prototype.</p></article>
+        <article class="feature-card reveal"><div class="feature-icon">⌘</div><h3>Rule-based results</h3><p>See Vata, Pitta and Kapha scores calculated from the choices you select.</p></article>
+        <article class="feature-card reveal"><div class="feature-icon">◷</div><h3>Your history</h3><p>After signing in, review saved classifications and export your history as a CSV file.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section section-soft" id="doshas">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">The three categories</span><h2>Meet Vata, Pitta & Kapha</h2><p>These short descriptions are illustrative examples for learning—not a health assessment.</p></div>
+      <div class="dosha-grid">
+        <article class="dosha-card vata reveal"><span class="symbol">🌬️</span><h3>Vata</h3><p>In this simplified model, Vata-related choices contribute to the Vata score.</p></article>
+        <article class="dosha-card pitta reveal"><span class="symbol">🔥</span><h3>Pitta</h3><p>In this simplified model, Pitta-related choices contribute to the Pitta score.</p></article>
+        <article class="dosha-card kapha reveal"><span class="symbol">💧</span><h3>Kapha</h3><p>In this simplified model, Kapha-related choices contribute to the Kapha score.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section"><div class="wrap"><div class="cta-band reveal"><div><h2>Ready to explore AyurClassify?</h2><p>Create an account to start the questionnaire and save your results.</p></div><button class="btn" id="bottomStart">Get started <span>↗</span></button></div></div></section>
+</section>
+
+<main class="wrap hidden" id="authView">
+  <div class="page-intro"><span class="eyebrow">Welcome to AyurClassify</span><h1 id="authHeading">Create your account</h1><p id="authIntro">Join to begin your educational classification journey.</p></div>
+  <div class="auth-layout">
+    <aside class="auth-aside"><div><span class="mini-tag">A mindful learning space</span><h2>Small steps toward understanding.</h2><p>Sign in to use the rule-based questionnaire, view your scores and keep track of your saved results.</p></div><div>🌿 &nbsp; Calm design. Clear rules. Simple learning.</div></aside>
+    <section class="panel">
+      <h2 id="formTitle">Create account</h2><p class="panel-sub" id="formSub">Fill in your details to register.</p>
+      <form id="authForm" class="auth-form">
+        <div id="nameField"><label for="name">Full name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Enter your full name" required></div>
+        <label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label for="password">Password</label><input id="password" name="password" type="password" minlength="6" autocomplete="current-password" placeholder="At least 6 characters" required><div class="field-hint">Use at least 6 characters.</div>
+        <button class="btn btn-primary" type="submit" id="authSubmit" style="width:100%;margin-top:22px">Create account <span>↗</span></button>
+      </form>
+      <p id="authMessage" class="message" role="status" aria-live="polite"></p>
+      <p class="form-switch"><span id="switchText">Already have an account?</span> <button type="button" class="text-button" id="switchMode">Log in</button></p>
+    </section>
+  </div>
+</main>
+
+<main class="wrap hidden" id="appView">
+  <div class="page-intro"><span class="eyebrow">Your personal space</span><h1 id="welcomeHeading">Welcome back.</h1><p>Explore the questionnaire, check your dashboard and review your saved history.</p></div>
+  <nav class="app-nav" aria-label="App navigation">
+    <button class="active" data-panel="classifyPanel">🌿 Classify</button><button data-panel="dashboardPanel">▦ Dashboard</button><button data-panel="historyPanel">◷ History</button><button data-panel="aboutPanel">ⓘ About</button>
+  </nav>
+  <section class="panel app-panel" id="classifyPanel">
+    <span class="eyebrow">Rule-based questionnaire</span><h2 style="margin-top:10px">A few questions about you</h2><p class="panel-sub">Choose the option that best matches you. Each selection adds one point to the related category.</p>
+    <form id="quizForm">
+      <div class="question-grid">
+        <div class="question"><label for="bodyBuild">1. Body build</label><select id="bodyBuild" required><option value="vata">Slim</option><option value="pitta">Medium</option><option value="kapha">Broad or sturdy</option></select></div>
+        <div class="question"><label for="skin">2. Skin description</label><select id="skin" required><option value="vata">Dry or rough</option><option value="pitta">Warm or sensitive</option><option value="kapha">Soft or oily</option></select></div>
+        <div class="question"><label for="energy">3. Energy pattern</label><select id="energy" required><option value="vata">Variable</option><option value="pitta">Focused and active</option><option value="kapha">Steady</option></select></div>
+      </div>
+      <button class="btn btn-primary" id="classifyBtn" type="submit" style="margin-top:22px">Calculate classification <span>↗</span></button>
+    </form>
+    <div id="resultBox" class="result-box hidden" aria-live="polite">
+      <div class="result-top"><div><span class="eyebrow">Your educational result</span><h2 id="resultCategory">Vata</h2><p id="resultDescription" style="color:var(--muted);margin:0"></p></div><span class="result-pill">Saved result</span></div>
+      <div class="score-grid">
+        <div class="score-card"><h3>🌬️ Vata score</h3><div class="score-number" id="vataValue">0</div><div class="track"><div class="fill" id="vataBar"></div></div></div>
+        <div class="score-card"><h3>🔥 Pitta score</h3><div class="score-number" id="pittaValue">0</div><div class="track"><div class="fill" id="pittaBar"></div></div></div>
+        <div class="score-card"><h3>💧 Kapha score</h3><div class="score-number" id="kaphaValue">0</div><div class="track"><div class="fill" id="kaphaBar"></div></div></div>
+      </div>
+      <p id="saveMessage" class="message"></p>
+    </div>
+    <p class="disclaimer">Educational prototype only. This simplified model is not clinically validated and cannot diagnose a medical condition or establish actual Prakriti. For personal health questions, consult a qualified professional.</p>
+  </section>
+  <section class="panel app-panel hidden" id="dashboardPanel">
+    <span class="eyebrow">A quick overview</span><h2 style="margin-top:10px">My dashboard</h2><p class="panel-sub">Your saved activity at a glance.</p>
+    <div class="stats-grid"><div class="stat-card"><span>Total classifications</span><strong id="totalResults">0</strong></div><div class="stat-card"><span>Last classification</span><strong id="lastClassification" style="font-size:17px">Not yet</strong></div><div class="stat-card"><span>Account</span><strong id="dashUser" style="font-size:17px">Signed in</strong></div></div>
+    <button class="btn btn-light" type="button" id="refreshDashboard" style="margin-top:20px">↻ Refresh dashboard</button><p class="message" id="dashboardMessage"></p>
+  </section>
+  <section class="panel app-panel hidden" id="historyPanel">
+    <span class="eyebrow">Your saved results</span><h2 style="margin-top:10px">Classification history</h2><p class="panel-sub">Only results associated with your account are shown.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"><button class="btn btn-light" type="button" id="loadHistory">↻ Load history</button><button class="btn btn-outline" type="button" id="exportHistory">↓ Export CSV</button></div>
+    <div id="historyList" class="history-list"><div class="empty-state">Select “Load history” to view saved results.</div></div><p class="message" id="historyMessage"></p>
+  </section>
+  <section class="panel app-panel hidden" id="aboutPanel">
+    <span class="eyebrow">About this project</span><h2 style="margin-top:10px">AyurClassify</h2><p class="about-copy">AyurClassify is a TYCS educational project that demonstrates how selected Ayurvedic concepts can be represented using a simple rule-based classification system. It collects questionnaire answers, calculates category scores using predefined rules and saves results for the signed-in user.</p>
+    <div class="about-grid"><div class="about-item"><strong>Frontend</strong>HTML, CSS and JavaScript</div><div class="about-item"><strong>Backend</strong>Node.js and Express API</div><div class="about-item"><strong>Database</strong>MySQL</div><div class="about-item"><strong>Core concept</strong>Rule-based scoring</div></div>
+    <p class="disclaimer">This is a simplified learning model, not a medical diagnostic tool.</p>
+  </section>
+</main>
+
+<footer class="footer" id="siteFooter">
+  <div class="wrap"><div class="footer-top"><div><a href="#home" class="brand"><span class="brand-mark"><span>✦</span></span> AyurClassify</a><p>An educational exploration of Ayurvedic classification through a simple rule-based system.</p></div><div><strong style="color:white">Explore</strong><p><a href="#about" style="color:#d7e2d6;text-decoration:none">About the project</a><br><a href="#doshas" style="color:#d7e2d6;text-decoration:none">The three categories</a></p></div></div><div class="footer-bottom"><span>© 2026 AyurClassify · TYCS Educational Project</span><span>Not a medical diagnostic tool.</span></div></div>
+</footer>
+
+<script>
+const API = "https://ayurclassify-backend.onrender.com";
+let token = "";
+let currentMode = "register";
+let currentUser = null;
+const $ = (id) => document.getElementById(id);
+const landingView = $("landingView"), authView = $("authView"), appView = $("appView");
+const authForm = $("authForm"), authMessage = $("authMessage");
+function showMessage(el, text, type="") { el.textContent = text; el.className = "message" + (type ? " " + type : ""); }
+function showPublicView() {
+  landingView.classList.remove("hidden"); authView.classList.add("hidden"); appView.classList.add("hidden");
+  $("publicNav").classList.remove("hidden"); $("publicActions").classList.remove("hidden"); $("userActions").classList.add("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function showAuth(mode="register") {
+  currentMode = mode; landingView.classList.add("hidden"); appView.classList.add("hidden"); authView.classList.remove("hidden");
+  $("publicNav").classList.add("hidden"); $("publicActions").classList.add("hidden"); $("userActions").classList.add("hidden");
+  const registering = mode === "register";
+  $("authHeading").textContent = registering ? "Create your account" : "Welcome back";
+  $("authIntro").textContent = registering ? "Join to begin your educational classification journey." : "Log in to continue your AyurClassify journey.";
+  $("formTitle").textContent = registering ? "Create account" : "Log in";
+  $("formSub").textContent = registering ? "Fill in your details to register." : "Enter your registered email and password.";
+  $("nameField").classList.toggle("hidden", !registering);
+  $("name").required = registering;
+  $("password").autocomplete = registering ? "new-password" : "current-password";
+  $("authSubmit").innerHTML = registering ? "Create account <span>↗</span>" : "Log in <span>↗</span>";
+  $("switchText").textContent = registering ? "Already have an account?" : "New to AyurClassify?";
+  $("switchMode").textContent = registering ? "Log in" : "Create account";
+  showMessage(authMessage, "");
+  authForm.reset();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function showApp(user) {
+  currentUser = user || null;
+  landingView.classList.add("hidden"); authView.classList.add("hidden"); appView.classList.remove("hidden");
+  $("publicNav").classList.add("hidden"); $("publicActions").classList.add("hidden"); $("userActions").classList.remove("hidden");
+  $("navUserName").textContent = currentUser?.name ? "Hi, " + currentUser.name : "Signed in";
+  $("welcomeHeading").textContent = currentUser?.name ? "Welcome back, " + currentUser.name + "." : "Welcome back.";
+  $("dashUser").textContent = currentUser?.name || "Signed in";
+  activatePanel("classifyPanel");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function activatePanel(panelId) {
+  document.querySelectorAll(".app-panel").forEach(p => p.classList.toggle("hidden", p.id !== panelId));
+  document.querySelectorAll(".app-nav button").forEach(b => b.classList.toggle("active", b.dataset.panel === panelId));
+  if(panelId === "dashboardPanel") loadDashboard();
+  if(panelId === "historyPanel") loadHistory();
+}
+$("navToggle").addEventListener("click", () => {
+  const nav = $("publicNav"), isOpen = nav.classList.toggle("open");
+  $("navToggle").setAttribute("aria-expanded", String(isOpen));
+  $("navToggle").textContent = isOpen ? "×" : "☰";
+});
+document.querySelectorAll("#publicNav a").forEach(a => a.addEventListener("click", () => $("publicNav").classList.remove("open")));
+$("navLogin").addEventListener("click", () => showAuth("login"));
+$("navGetStarted").addEventListener("click", () => showAuth("register"));
+$("heroStart").addEventListener("click", () => showAuth("register"));
+$("bottomStart").addEventListener("click", () => showAuth("register"));
+$("switchMode").addEventListener("click", () => showAuth(currentMode === "register" ? "login" : "register"));
+$("brandLink").addEventListener("click", (e) => { if(!token){ e.preventDefault(); showPublicView(); } });
+$("navLogout").addEventListener("click", () => {
+  token = ""; currentUser = null; $("resultBox").classList.add("hidden");
+  $("totalResults").textContent = "0"; $("lastClassification").textContent = "Not yet";
+  $("historyList").innerHTML = '<div class="empty-state">Log in to view your history.</div>';
+  showPublicView();
+});
+document.querySelectorAll(".app-nav button").forEach(b => b.addEventListener("click", () => activatePanel(b.dataset.panel)));
+
+authForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const submit = $("authSubmit");
+  submit.disabled = true;
+  showMessage(authMessage, currentMode === "register" ? "Creating your account…" : "Logging you in…");
+  const payload = { email: $("email").value.trim(), password: $("password").value };
+  if(currentMode === "register") payload.name = $("name").value.trim();
+  try {
+    const response = await fetch(`${API}/api/${currentMode}`, {
+      method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)
+    });
+    const data = await response.json().catch(() => ({}));
+    if(!response.ok) throw new Error(data.message || "Request failed. Please try again.");
+    if(currentMode === "register") {
+      showAuth("login");
+      showMessage(authMessage, "Registration successful! Please log in.", "success");
+      $("email").value = payload.email;
+    } else {
+      token = data.token;
+      currentUser = data.user || {name:payload.email.split("@")[0],email:payload.email};
+      showApp(currentUser);
+    }
+  } catch(error) {
+    showMessage(authMessage, error.message || "Cannot connect to backend. Check that server.js is running.", "error");
+  } finally { submit.disabled = false; }
+});
+
+$("quizForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const btn = $("classifyBtn"); btn.disabled = true;
+  showMessage($("saveMessage"), "Calculating and saving your result…");
+  const answers = [$("bodyBuild").value, $("skin").value, $("energy").value];
+  const scores = {vata:0,pitta:0,kapha:0};
+  answers.forEach(answer => scores[answer]++);
+  const maxScore = Math.max(scores.vata,scores.pitta,scores.kapha);
+  const winners = Object.keys(scores).filter(key => scores[key] === maxScore);
+  const category = winners.length > 1 ? "Mixed / Tie" : winners[0][0].toUpperCase()+winners[0].slice(1);
+  const descriptions = {
+    "Vata":"Your selected answers contributed most points to Vata in this simplified rule-based model.",
+    "Pitta":"Your selected answers contributed most points to Pitta in this simplified rule-based model.",
+    "Kapha":"Your selected answers contributed most points to Kapha in this simplified rule-based model.",
+    "Mixed / Tie":"Your selected answers resulted in equal top scores across categories in this simplified rule-based model."
+  };
+  $("resultCategory").textContent = category;
+  $("resultDescription").textContent = descriptions[category];
+  ["vata","pitta","kapha"].forEach(key => {
+    $(key+"Value").textContent = scores[key];
+    $(key+"Bar").style.width = (scores[key]/3*100)+"%";
+  });
+  $("resultBox").classList.remove("hidden");
+  try {
+    const response = await fetch(`${API}/api/classify`, {
+      method:"POST", headers:{"Content-Type":"application/json","Authorization":`Bearer ${token}`},
+      body:JSON.stringify({vata:scores.vata,pitta:scores.pitta,kapha:scores.kapha,category})
+    });
+    const data = await response.json().catch(() => ({}));
+    if(!response.ok) throw new Error(data.message || "Result could not be saved.");
+    showMessage($("saveMessage"), "✓ " + (data.message || "Classification result saved!"), "success");
+  } catch(error) {
+    showMessage($("saveMessage"), "Result calculated, but saving failed: " + error.message + " Check your backend/database connection.", "error");
+  }
+  btn.disabled = false;
+  $("resultBox").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+async function loadDashboard() {
+  if(!token) return;
+  showMessage($("dashboardMessage"), "Loading dashboard…");
+  try {
+    const response = await fetch(`${API}/api/dashboard`, {headers:{"Authorization":`Bearer ${token}`}});
+    const data = await response.json().catch(() => ({}));
+    if(!response.ok) throw new Error(data.message || "Could not load dashboard.");
+    $("totalResults").textContent = data.totalResults ?? 0;
+    $("lastClassification").textContent = data.lastClassification ? new Date(data.lastClassification).toLocaleDateString() : "Not yet";
+    showMessage($("dashboardMessage"), "");
+  } catch(error) { showMessage($("dashboardMessage"), error.message, "error"); }
+}
+async function fetchHistory() {
+  const response = await fetch(`${API}/api/history`, {headers:{"Authorization":`Bearer ${token}`}});
+  const data = await response.json().catch(() => ([]));
+  if(!response.ok) throw new Error(data.message || "Could not load history.");
+  return Array.isArray(data) ? data : [];
+}
+function safeDate(value) {
+  if(!value) return "Date unavailable";
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? String(value) : d.toLocaleString();
+}
+async function loadHistory() {
+  if(!token) return;
+  const list = $("historyList");
+  list.innerHTML = '<div class="empty-state">Loading history…</div>';
+  showMessage($("historyMessage"), "");
+  try {
+    const rows = await fetchHistory();
+    list.innerHTML = "";
+    if(rows.length === 0) { list.innerHTML = '<div class="empty-state">No saved classifications yet. Complete the questionnaire first.</div>'; return; }
+    rows.forEach(row => {
+      const item = document.createElement("article"); item.className = "history-item";
+      const left = document.createElement("div");
+      const title = document.createElement("strong"); title.textContent = row.result_category || "Classification";
+      const date = document.createElement("small"); date.textContent = safeDate(row.created_at);
+      left.append(title,date);
+      const scores = document.createElement("span");
+      scores.style.cssText = "font-size:13px;color:#617064";
+      scores.textContent = `Vata ${row.vata_score} · Pitta ${row.pitta_score} · Kapha ${row.kapha_score}`;
+      item.append(left,scores); list.appendChild(item);
+    });
+  } catch(error) { list.innerHTML = '<div class="empty-state">History could not be loaded.</div>'; showMessage($("historyMessage"), error.message, "error"); }
+}
+$("refreshDashboard").addEventListener("click", loadDashboard);
+$("loadHistory").addEventListener("click", loadHistory);
+$("exportHistory").addEventListener("click", async () => {
+  try {
+    showMessage($("historyMessage"), "Preparing CSV…");
+    const rows = await fetchHistory();
+    if(rows.length === 0) { showMessage($("historyMessage"), "No history to export yet.", "error"); return; }
+    const columns = ["id","vata_score","pitta_score","kapha_score","result_category","created_at"];
+    const quote = value => '"' + String(value ?? "").replace(/"/g,'""') + '"';
+    const csv = [columns.join(","), ...rows.map(row => columns.map(key => quote(row[key])).join(","))].join("\r\n");
+    const blob = new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+    const url = URL.createObjectURL(blob); const a = document.createElement("a");
+    a.href = url; a.download = "AyurClassify_History.csv"; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    showMessage($("historyMessage"), "CSV exported successfully.", "success");
+  } catch(error) { showMessage($("historyMessage"), error.message, "error"); }
+});
+const observer = ("IntersectionObserver" in window) ? new IntersectionObserver(entries => {
+  entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }});
+},{threshold:.12}) : null;
+document.querySelectorAll(".reveal").forEach(el => { if(observer) observer.observe(el); else el.classList.add("visible"); });
+(async function checkBackend() {
+  try {
+    const r = await fetch(`${API}/api/status`);
+    const data = await r.json();
+    if(!r.ok || data.database !== "Connected") console.warn("AyurClassify database status:", data);
+  } catch(error) { console.info("Start the Express backend using node server.js before logging in."); }
+})();
+</script>
+</body>
+</html>
